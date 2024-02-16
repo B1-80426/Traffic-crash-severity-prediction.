@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Collision Classification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        h1, h5 {
+            text-align: center;
+            color: #495057;
+        }
+        .form-select {
+            background-color: #e9ecef;
+            border-color: #ced4da;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Collision Classification</h1>
+        <h5>Predict Collision Severity</h5>
+        <form method="POST" action="/classify">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="party1_type">Assailant</label>
+                    <select id="party1_type" name="party1_type" class="form-select">
+                        <option value="Driver">Driver</option>
+                        <option value="Bicyclist">Bicyclist</option>
+                        <option value="Parked Vehicle">Parked Vehicle</option>
+                        <option value="Pedestrian">Pedestrian</option>
+                        <option value="Other">Other</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <option value="Bicycle">Bicycle</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="party2_type">Victim</label>
+                    <select id="party2_type" name="party2_type" class="form-select">
+                        <option value="Driver">Driver</option>
+                        <option value="Bicyclist">Bicyclist</option>
+                        <option value="Parked Vehicle">Parked Vehicle</option>
+                        <option value="Pedestrian">Pedestrian</option>
+                        <option value="Other">Other</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <!-- Options for Party 2 Type -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="lighting">Lighting</label>
+                    <select id="lighting" name="lighting" class="form-select">
+                        <option value="DayLight">DayLight</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <option value="Dark - Street Lights Not Functioning">Dark - Streetlights Not Functioning</option>
+                        <option value="Dark - Street Lights">Dark - Street Lights</option>
+                        <option value="Dusk - Dawn">Dusk - Dawn</option>
+                        <option value="Dark - No Street Lights">Dark - No Street Lights</option>
+                        <!-- Options for Lighting -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="type_of_collision">Type of Collision</label>
+                    <select id="type_of_collision" name="type_of_collision" class="form-select">
+                        <option value="Broadside">Broadside</option>
+                        <option value="Vehicle/Pedestrian">Vehicle/Pedestrian</option>
+                        <option value="Rear End">Rear End</option>
+                        <option value="Head-On">Head-On</option>
+                        <option value="Other">Other</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <option value="Sideswipe">Sideswipe</option>
+                        <option value="Hit Object">Hit Object</option>
+                        <option value="Overturned">Overturned</option>
+                        <!-- Options for Type of Collision -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="road_surface">Road Surface</label>
+                    <select id="road_surface" name="road_surface" class="form-select">
+                        <option value="Dry">Dry</option>
+                        <option value="Wet">Wet</option>
+                        <option value="Slippery">Slippery</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <!-- Options for Road Surface -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="weather_1">Weather</label>
+                    <select id="weather_1" name="weather_1" class="form-select">
+                        <option value="Clear">Clear</option>
+                        <option value="Cloudy">Cloudy</option>
+                        <option value="Raining">Raining</option>
+                        <option value="Fog">Fog</option>
+                        <option value="Other">Other</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <option value="Wind">Wind</option>
+                        <option value="Snowing">Snowing</option>
+                        <option value="Fog / Visibility: 800 ft">Fog / Visibility: 800 ft</option>
+                        <option value="Fog / Visibility: 10 ft">Fog / Visibility: 10 ft</option>
+                        <option value="Other:Not At Scene">Other:Not At Scene</option>
+                        <option value="Other: Unknown">Other: Unknown</option>
+                        <!-- Options for Weather 1 -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="road_cond_1">Road Condition 1</label>
+                    <select id="road_cond_1" name="road_cond_1" class="form-select">
+                        <option value="No Unusual Condition">No Unusual Condition</option>
+                        <option value="Construction or Repair Zone">Construction or Repair Zone</option>
+                        <option value="Deep Ruts">Deep Ruts</option>
+                        <option value="Holes">Holes</option>
+                        <option value="Other">Other</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <option value="Obstruction on Roadway">Obstruction on Roadway</option>
+                        <option value="Reduced Roadway Width">Reduced Roadway Width</option>
+                        <option value="Loose Material on Roadway">Loose Material on Roadway</option>
+                        <!-- Options for Road Condition 1 -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="road_cond_2">Road Condition 2</label>
+                    <select id="road_cond_2" name="road_cond_2" class="form-select">
+                        <option value="No Unusual Condition">No Unusual Condition</option>
+                        <option value="Construction or Repair Zone">Construction or Repair Zone</option>
+                        <option value="Flooded">Flooded</option>
+                        <option value="Other">Other</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <option value="Obstruction on Roadway">Obstruction on Roadway</option>
+                        <option value="Reduced Roadway Width">Reduced Roadway Width</option>
+                        <option value="Loose Material on Roadway">Loose Material on Roadway</option>
+                        <!-- Options for Road Condition 2 -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="party1_dir_of_travel">Assailant Direction of Travel</label>
+                    <select id="party1_dir_of_travel" name="party1_dir_of_travel" class="form-select">
+                        <option value="East">East</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="West">West</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <!-- Options for Party 1 Direction of Travel -->
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="party2_dir_of_travel">Victim Direction of Travel</label>
+                    <select id="party2_dir_of_travel" name="party2_dir_of_travel" class="form-select">
+                        <option value="East">East</option>
+                        <option value="North">North</option>
+                        <option value="South">South</option>
+                        <option value="West">West</option>
+                        <option value="Not Stated">Not Stated</option>
+                        <!-- Options for Party 2 Direction of Travel -->
+                    </select>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-success">Predict</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
